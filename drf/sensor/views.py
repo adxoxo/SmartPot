@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
-from .serializers import TempHumidSerializer
+from .serializers import TempHumidSerializer, LightSerializer
 from .models import TempHumid
 
 class TemperatureHumidityView(ViewSet):
@@ -20,6 +20,22 @@ class TemperatureHumidityView(ViewSet):
     @csrf_exempt
     def temphumidread(self, request):
         serializer = TempHumidSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.data, status=400)
+
+class LightSensorView(ViewSet):
+
+    def lightlist(self, request):
+        data = Light.objects.all()
+        serializer = LightSerializer(data, many=True)
+
+        return Response(serializer.data, status=200)
+
+    def lightread(self, request):
+        serialiezr = LightSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)

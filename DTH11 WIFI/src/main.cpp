@@ -8,12 +8,12 @@
 #define DHTPIN D1
 #define DHTTYPE DHT11 
 
-const char* ssid = "Gemenez_2.4ghz";
-const char* password = "LifeIsHere";
-const char* serverUrl = "http:192.168.1.67:8000/api/data/temphumid/";
-
+const char* ssid = "";
+const char* password = "";
+const char* serverUrl = "";
+"
 DHT dht(DHTPIN, DHTTYPE);
-DynamicJsonDocument thjson(256);
+DynamicJsonDocument thjson(1024);
 
 void setup() {
   Serial.begin(9600);
@@ -40,8 +40,6 @@ void loop() {
   float temps = dht.readTemperature();
   delay(10);
   float hums = dht.readHumidity();
-  Serial.print(temps);
-  Serial.print(hums);
 
   thjson.clear();
   thjson["temp"] = temps;
