@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TemperatureHumidityView, LightSensorView
+from .views import TemperatureHumidityView, LightSensorView, SoilMoistureView
 
 urlpatterns = [
     path('temphumid/', TemperatureHumidityView.as_view({
@@ -9,5 +9,9 @@ urlpatterns = [
     path('light', LightSensorView.as_view({
         'get': 'lightlist',
         'post': 'lightread'
+    })),
+    path('soil', SoilMoistureView.as_view({
+        'get': 'moisturelist',
+        'post': 'moistureread'
     }))
 ]

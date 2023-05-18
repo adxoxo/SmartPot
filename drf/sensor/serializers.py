@@ -1,5 +1,4 @@
-from .models import TempHumid
-from .models import Light
+from .models import TempHumid, Light, SoilMoisture
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
@@ -13,4 +12,7 @@ class LightSerializer(ModelSerializer):
         model = Light
         fields = '__all__'
 
-    
+class MoistureSerializer(ModelSerializer):
+    class Meta:
+        model = SoilMoisture
+        fields = '__all__'
