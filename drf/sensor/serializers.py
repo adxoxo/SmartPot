@@ -7,6 +7,10 @@ class TempHumidSerializer(ModelSerializer):
         model = TempHumid
         fields = '__all__'
 
+class AveragePercentSerializer(serializers.Serializer):
+    average_percent = serializers.FloatField() 
+    average_actualpercent = serializers.FloatField()
+
 class LightSerializer(ModelSerializer):
     class Meta:
         model = Light
