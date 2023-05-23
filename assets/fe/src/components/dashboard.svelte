@@ -2,9 +2,10 @@
     import { Gauge } from 'framework7-svelte';
     import { onMount } from "svelte";
 
-
     let tempaveragePercent;
     let tempaverage_actualPercent;
+    let humidpercent;
+    let humid_actualpercent;
 
     onMount(async () => {
     try {
@@ -12,10 +13,42 @@
         const data = await response.json();
         tempaveragePercent = data.average.average_percent;
         tempaverage_actualPercent = data.average.average_actualpercent;
+        humidpercent = data.humidaverage.average_percent;
+        humid_actualpercent = data.humidaverage.average_actualpercent;
     } catch (error) {
         console.error(error);
     }
     });
+
+    let lightaveragePercent;
+    let lightaverage_actualPercent;
+
+    onMount(async () => {
+    try {
+        const response = await fetch('http://localhost:8000/api/data/light/'); // Replace with your Django REST API URL
+        const data = await response.json();
+        lightaveragePercent = data.average.average_percent;
+        lightaverage_actualPercent = data.average.average_actualpercent;
+    } catch (error) {
+        console.error(error);
+    }
+    });
+
+    let moistureaveragePercent;
+    let moistureaverage_actualPercent;
+
+    onMount(async () => {
+    try {
+        const response = await fetch('http://localhost:8000/api/data/soil/'); // Replace with your Django REST API URL
+        const data = await response.json();
+        moistureaveragePercent = data.average.average_percent;
+        moistureaverage_actualPercent = data.average.average_actualpercent;
+    } catch (error) {
+        console.error(error);
+    }
+    });
+
+
 </script>
 
 <main>
@@ -28,8 +61,8 @@
                     <div class="text-align-center">
                         <Gauge
                         type="circle"
-                        value={0.44}
-                        valueText="44%"
+                        value={moistureaveragePercent}
+                        valueText="{moistureaverage_actualPercent}%"
                         valueTextColor="#ff9800"
                         borderColor="#ff9800"
                         />
@@ -41,8 +74,8 @@
                     <div class="text-align-center">
                         <Gauge
                         type="circle"
-                        value={0.44}
-                        valueText="44%"
+                        value={lightaveragePercent}
+                        valueText="{lightaverage_actualPercent}%"
                         valueTextColor="#ff9800"
                         borderColor="#ff9800"
                         />
@@ -54,8 +87,8 @@
                     <div class="text-align-center">
                         <Gauge
                         type="circle"
-                        value={0.44}
-                        valueText="44%"
+                        value={humidpercent}
+                        valueText="{humid_actualpercent}%"
                         valueTextColor="#ff9800"
                         borderColor="#ff9800"
                         />
