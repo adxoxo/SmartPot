@@ -6,11 +6,11 @@ urlpatterns = [
         'get':'temphumidlist',
         'post':'temphumidread'
     })),
-    path('light', LightSensorView.as_view({
+    path('light/', LightSensorView.as_view({
         'get': 'lightlist',
         'post': 'lightread'
     })),
-    path('soil', SoilMoistureView.as_view({
+    path('soil/', SoilMoistureView.as_view({
         'get': 'moisturelist',
         'post': 'moistureread'
     }))
