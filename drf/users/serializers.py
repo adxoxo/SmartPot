@@ -19,4 +19,12 @@ class SignUpSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+class LoginSerializer(serializers.ModelSerializer):
+
+    email = serializers.CharField()
+    
+    class Meta:
+        model = User
+        fields = ['email', 'password']
     
